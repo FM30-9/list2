@@ -15,188 +15,191 @@
 </head>
 
 <body>
-    <div id="root"></div>
+    <div id="root">
 
-    <script type="text/babel">
-        const { useState, useEffect, useMemo } = React;
+        <script type="text/babel">
+            const { useState, useEffect, useMemo } = React;
 
-        const App = () => {
-            const [items, setItems] = useState([]);
-            const [inputValue, setInputValue] = useState('');
-            const [editingTagId, setEditingTagId] = useState(null);
-            const [tagInput, setTagInput] = useState('');
-            const [sortMode, setSortMode] = useState('custom');
+            const App = () => {
+                const [items, setItems] = useState([]);
+                const [inputValue, setInputValue] = useState('');
+                const [editingTagId, setEditingTagId] = useState(null);
+                const [tagInput, setTagInput] = useState('');
+                const [sortMode, setSortMode] = useState('custom');
 
-            useEffect(() => {
-                const saved = localStorage.getItem('bucket-list-final');
-                if (saved) setItems(JSON.parse(saved));
-                lucide.createIcons();
-            }, []);
+                useEffect(() => {
+                    const saved = localStorage.getItem('bucket-list-final');
+                    if (saved) setItems(JSON.parse(saved));
+                    lucide.createIcons();
+                }, []);
 
-            useEffect(() => {
-                localStorage.setItem('bucket-list-final', JSON.stringify(items));
-                lucide.createIcons();
-            }, [items]);
+                useEffect(() => {
+                    localStorage.setItem('bucket-list-final', JSON.stringify(items));
+                    lucide.createIcons();
+                }, [items]);
 
-            const addItem = (e) => {
-                e.preventDefault();
-                if (!inputValue.trim()) return;
+                const addItem = (e) => {
+                    e.preventDefault();
+                    if (!inputValue.trim()) return;
 
-                const newItem = {
-                    id: Date.now(),
-                    text: inputValue,
-                    completed: false,
-                    tags: [],
-                    createdAt: new Date().toLocaleDateString('ja-JP', { month: 'short', day: 'numeric' }),
-                    completedAt: null,
+                    const newItem = {
+                        id: Date.now(),
+                        text: inputValue,
+                        completed: false,
+                        tags: [],
+                        createdAt: new Date().toLocaleDateString('ja-JP', { month: 'short', day: 'numeric' }),
+                        completedAt: null,
+                    };
+
+                    setItems([newItem, ...items]);
+                    setInputValue('');
                 };
 
-                setItems([newItem, ...items]);
-                setInputValue('');
-            };
+                const toggleComplete = (id) => {
+                    setItems(items.map(item =>
+                        item.id === id
+                            ? {
+                                ...item,
+                                completed: !item.completed,
+                                completedAt: !item.completed
+                                    ? new Date().toLocaleDateString('ja-JP', { month: 'short', day: 'numeric' })
+                                    : null
+                            }
+                            : item
+                    ));
+                };
 
-            const toggleComplete = (id) => {
-                setItems(items.map(item =>
-                    item.id === id
-                        ? {
-                            ...item,
-                            completed: !item.completed,
-                            completedAt: !item.completed
-                                ? new Date().toLocaleDateString('ja-JP', { month: 'short', day: 'numeric' })
-                                : null
+                const addTag = (id) => {
+                    if (!tagInput.trim()) return;
+
+                    const clean = tagInput.replace(/^#/, '');
+
+                    setItems(items.map(item => {
+                        if (item.id === id && !item.tags.includes(clean)) {
+                            return { ...item, tags: [...item.tags, clean] };
                         }
-                        : item
-                ));
-            };
+                        return item;
+                    }));
 
-            const addTag = (id) => {
-                if (!tagInput.trim()) return;
+                    setTagInput('');
+                    setEditingTagId(null);
+                };
 
-                const clean = tagInput.replace(/^#/, '');
-
-                setItems(items.map(item => {
-                    if (item.id === id && !item.tags.includes(clean)) {
-                        return { ...item, tags: [...item.tags, clean] };
+                const getTagColor = (tag) => {
+                    const colors = ['tag-blue', 'tag-purple', 'tag-rose', 'tag-amber'];
+                    let hash = 0;
+                    for (let i = 0; i < tag.length; i++) {
+                        hash = tag.charCodeAt(i) + ((hash << 5) - hash);
                     }
-                    return item;
-                }));
+                    return colors[Math.abs(hash) % colors.length];
+                };
 
-                setTagInput('');
-                setEditingTagId(null);
-            };
+                const sortedItems = useMemo(() => {
+                    const list = [...items];
+                    if (sortMode === 'completed-bottom') {
+                        return list.sort((a, b) => a.completed === b.completed ? 0 : a.completed ? 1 : -1);
+                    }
+                    if (sortMode === 'tags') {
+                        return list.sort((a, b) => (a.tags[0] || 'zzz').localeCompare(b.tags[0] || 'zzz'));
+                    }
+                    return items;
+                }, [items, sortMode]);
 
-            const getTagColor = (tag) => {
-                const colors = ['tag-blue', 'tag-purple', 'tag-rose', 'tag-amber'];
-                let hash = 0;
-                for (let i = 0; i < tag.length; i++) {
-                    hash = tag.charCodeAt(i) + ((hash << 5) - hash);
-                }
-                return colors[Math.abs(hash) % colors.length];
-            };
+                return (
+                    <div className="app">
+                        <div className="container">
 
-            const sortedItems = useMemo(() => {
-                const list = [...items];
-                if (sortMode === 'completed-bottom') {
-                    return list.sort((a, b) => a.completed === b.completed ? 0 : a.completed ? 1 : -1);
-                }
-                if (sortMode === 'tags') {
-                    return list.sort((a, b) => (a.tags[0] || 'zzz').localeCompare(b.tags[0] || 'zzz'));
-                }
-                return items;
-            }, [items, sortMode]);
-
-            return (
-                <div className="app">
-                    <div className="container">
-
-                        {/* Header */}
-                        <div className="header">
-                            <h1>やりたいこと <span>リスト</span></h1>
-                            <div className="count">
-                                <span class="can">{items.filter(i => i.completed).length}</span>
-                                <span class="srash"> / </span>
-                                <span class="total">{items.length}</span>
-                            </div>
-                        </div>
-
-                        {/* Sort */}
-                        <div className="sort">
-                            <button className={sortMode === 'custom' ? 'active' : ''} onClick={() => setSortMode('custom')}>CUSTOM</button>
-                            <button className={sortMode === 'tags' ? 'active purple' : ''} onClick={() => setSortMode('tags')}>TAGS</button>
-                            <button className={sortMode === 'completed-bottom' ? 'active green' : ''} onClick={() => setSortMode('completed-bottom')}>AUTO</button>
-                        </div>
-
-                        {/* Input */}
-                        <form onSubmit={addItem} className="input-box">
-                            <input
-                                value={inputValue}
-                                onChange={(e) => setInputValue(e.target.value)}
-                                placeholder="新しい夢を追加…"
-                            />
-                            <button>+</button>
-                        </form>
-
-                        {/* List */}
-                        <div className="list custom-scrollbar">
-                            {sortedItems.map(item => (
-                                <div key={item.id} className={`card ${item.completed ? 'done' : ''}`}>
-
-                                    <div className="card-row">
-                                        <div className="checkbox" onClick={() => toggleComplete(item.id)}>
-                                            {item.completed ? "✓" : ""}
-                                        </div>
-
-                                        <div className="content">
-                                            <div className="text">{item.text}</div>
-                                            <div className="date">
-                                                作成: {item.createdAt}
-                                                {item.completedAt && ` | 達成: ${item.completedAt}`}
-                                            </div>
-                                        </div>
-
-                                        <button className="delete" onClick={() => setItems(items.filter(i => i.id !== item.id))}>
-                                            ×
-                                        </button>
-                                    </div>
-
-                                    <div className="tags">
-                                        {item.tags.map(tag => (
-                                            <span key={tag} className={`tag ${getTagColor(tag)}`}>
-                                                #{tag}
-                                            </span>
-                                        ))}
-
-                                        {editingTagId === item.id ? (
-                                            <input
-                                                autoFocus
-                                                className="tag-input"
-                                                onChange={(e) => setTagInput(e.target.value)}
-                                                onKeyDown={(e) => e.key === 'Enter' && addTag(item.id)}
-                                                onBlur={() => setEditingTagId(null)}
-                                            />
-                                        ) : (
-                                            <button className="tag-add" onClick={() => setEditingTagId(item.id)}>
-                                                # タグ追加
-                                            </button>
-                                        )}
-                                    </div>
-
+                            {/* Header */}
+                            <div className="header">
+                                <h1>やりたいこと <span>リスト</span></h1>
+                                <div className="count">
+                                    <span class="can">{items.filter(i => i.completed).length}</span>
+                                    <span class="srash"> / </span>
+                                    <span class="total">{items.length}</span>
                                 </div>
-                            ))}
+                            </div>
+
+                            {/* Sort */}
+                            <div className="sort">
+                                <button className={sortMode === 'custom' ? 'active' : ''} onClick={() => setSortMode('custom')}>CUSTOM</button>
+                                <button className={sortMode === 'tags' ? 'active purple' : ''} onClick={() => setSortMode('tags')}>TAGS</button>
+                                <button className={sortMode === 'completed-bottom' ? 'active green' : ''} onClick={() => setSortMode('completed-bottom')}>AUTO</button>
+                            </div>
+
+                            {/* Input */}
+                            <form onSubmit={addItem} className="input-box">
+                                <input
+                                    value={inputValue}
+                                    onChange={(e) => setInputValue(e.target.value)}
+                                    placeholder="新しい夢を追加…"
+                                />
+                                <button>+</button>
+                            </form>
+
+                            {/* List */}
+                            <div className="list custom-scrollbar">
+                                {sortedItems.map(item => (
+                                    <div key={item.id} className={`card ${item.completed ? 'done' : ''}`}>
+
+                                        <div className="card-row">
+                                            <div className="checkbox" onClick={() => toggleComplete(item.id)}>
+                                                {item.completed ? "✓" : ""}
+                                            </div>
+
+                                            <div className="content">
+                                                <div className="text">{item.text}</div>
+                                                <div className="date">
+                                                    作成: {item.createdAt}
+                                                    {item.completedAt && ` | 達成: ${item.completedAt}`}
+                                                </div>
+                                            </div>
+
+                                            <button className="delete" onClick={() => setItems(items.filter(i => i.id !== item.id))}>
+                                                ×
+                                            </button>
+                                        </div>
+
+                                        <div className="tags">
+                                            {item.tags.map(tag => (
+                                                <span key={tag} className={`tag ${getTagColor(tag)}`}>
+                                                    #{tag}
+                                                </span>
+                                            ))}
+
+                                            {editingTagId === item.id ? (
+                                                <input
+                                                    autoFocus
+                                                    className="tag-input"
+                                                    onChange={(e) => setTagInput(e.target.value)}
+                                                    onKeyDown={(e) => e.key === 'Enter' && addTag(item.id)}
+                                                    onBlur={() => setEditingTagId(null)}
+                                                />
+                                            ) : (
+                                                <button className="tag-add" onClick={() => setEditingTagId(item.id)}>
+                                                    # タグ追加
+                                                </button>
+                                            )}
+                                        </div>
+
+                                    </div>
+                                ))}
+
+                            </div>
+
                         </div>
+                        <footer class="last">
+                            Write down your dreams,color your future
+                        </footer>
 
                     </div>
-                </div>
-            );
-        };
+                );
+            };
 
 
-        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
-    </script>
+            ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+        </script>
 
-    <footer class="last">
-        Write down your dreams, color your future
-    </footer>
+    </div>
 </body>
 
 </html>
