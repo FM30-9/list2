@@ -1,0 +1,283 @@
+body {
+    margin: 0;
+    background: #f0f5ff;
+    color: #474f5a;
+    font-family: sans-serif;
+}
+
+/* 全体 */
+.app {
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ヘッダー */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 28px;
+    font-weight: 900;
+}
+
+.count {
+    color: #4e71a5;
+    font-size: 20px;
+
+}
+
+/* ソート */
+.sort {
+    display: flex;
+    background: rgba(15, 23, 42, 0.5);
+    padding: 5px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    width: fit-content;
+}
+
+.sort button {
+    border: none;
+    background: transparent;
+    color: #f1f7ff;
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.sort button.active {
+    background: white;
+    color: black;
+}
+
+.sort button.purple.active {
+    background: #6366f1;
+    color: white;
+}
+
+.sort button.green.active {
+    background: #10b981;
+    color: white;
+}
+
+/* 入力 */
+.input-box {
+    display: flex;
+    gap: 10px;
+    background: #474f5a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.input-box input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: white;
+    outline: none;
+}
+
+.input-box button {
+    background: white;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+/* リスト */
+.list {
+    overflow-y: auto;
+    flex: 1;
+}
+
+/* カード */
+.card {
+    background: rgb(235 255 231);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+}
+
+.card.done {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.3);
+}
+
+/* 行 */
+.card-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.checkbox {
+    width: 24px;
+    height: 24px;
+    border: 2px solid #334155;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card.done .checkbox {
+    background: #10b981;
+    color: black;
+}
+
+/* テキスト */
+.content {
+    flex: 1;
+}
+
+.text {
+    font-weight: 600;
+}
+
+.card.done .text {
+    color: rgba(16, 185, 129, 0.5);
+}
+
+.date {
+    font-size: 10px;
+    color: #5b5b5b;
+}
+
+/* 削除 */
+.delete {
+    background: none;
+    border: none;
+    color: #5b5b5b;
+    cursor: pointer;
+}
+
+.delete:hover {
+    color: #f43f5e;
+}
+
+/* タグ */
+.tags {
+    margin-top: 10px;
+    padding-left: 34px;
+}
+
+.tag {
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+/* タグ色 */
+.tag-blue {
+    background: rgba(59, 130, 246, 0.2);
+    color: #60a5fa;
+}
+
+.tag-purple {
+    background: rgba(168, 85, 247, 0.2);
+    color: #c084fc;
+}
+
+.tag-rose {
+    background: rgba(244, 63, 94, 0.2);
+    color: #fb7185;
+}
+
+.tag-amber {
+    background: rgba(255, 191, 29, 0.2);
+    color: #e0a205;
+}
+
+/* タグ入力 */
+.tag-input {
+    background: #d4e0f6;
+    border: none;
+    color: rgb(76, 76, 76);
+    font-size: 10px;
+    padding: 2px 5px;
+    border-radius: 5px;
+    width: 60px;
+}
+
+/* タグ追加 */
+.tag-add {
+    font-size: 10px;
+    color: #5b5b5b;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.tag-add:hover {
+    color: #cbd5f5;
+}
+
+/* スクロールバー */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #1e293b;
+    border-radius: 10px;
+}
+
+
+h1 {
+    letter-spacing: -0.05em;
+    font-weight: 800;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+}
+
+span {
+    letter-spacing: 0.01em;
+    color: rgb(68, 170, 221);
+}
+
+.can {
+    color: #000;
+    font-size: 2.0rem;
+    line-height: 2.5rem;
+}
+
+.total {
+    color: rgb(148 163 184);
+    font-size: 1.5rem;
+}
+
+.srash {
+    color: rgb(148 163 184);
+    vertical-align: 10%;
+
+}
+
+.last {
+    position: sticky;
+    bottom: 0;
+    text-align: center;
+    padding: 1.5rem 0;
+    letter-spacing: 0.3em;
+    font-style: italic;
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: 11px;
+}
