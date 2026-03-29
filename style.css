@@ -8,8 +8,10 @@ body {
 
 /* 全体 */
 .app {
-    padding: 20px;
-    min-height: 100dvh;
+    height: 100dvh;
+    /* スマホのキーボード等を考慮した動的な高さ */
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
@@ -138,9 +140,9 @@ h1 span {
 .card {
     background: rgb(235 255 231);
     border: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 15px;
+    padding: 6px 10px;
     border-radius: 15px;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
 }
 
 .card.done {
@@ -181,7 +183,7 @@ h1 span {
 }
 
 .card.done .text {
-    color: rgba(16, 185, 129, 0.5);
+    color: rgb(112 166 148);
 }
 
 .date {
@@ -272,13 +274,13 @@ h1 span {
 
 
 .last {
+    color: #5b5b5b;
     position: sticky;
-    bottom: 0;
     text-align: center;
-    padding: 1.5rem 0;
-    letter-spacing: 0.3em;
+    padding: 1rem 0;
+    letter-spacing: 0.3px;
     font-style: italic;
     text-transform: uppercase;
     font-weight: 800;
-    font-size: 11px;
+    font-size: 10px;
 }
