@@ -1,7 +1,7 @@
 body {
     margin: 0;
     background: #f0f5ff;
-    color: #474f5a;
+    color: rgb(41, 50, 70);
     font-family: sans-serif;
 }
 
@@ -33,15 +33,30 @@ h1 {
 }
 
 .count {
-    color: #4e71a5;
     font-size: 20px;
+}
+
+.can {
+    color: rgb(41, 50, 70);
+    font-size: 2.0rem;
+    line-height: 2.5rem;
+}
+
+.total {
+    color: rgb(148 163 184);
+    font-size: 1.5rem;
+}
+
+.srash {
+    color: rgb(148 163 184);
+    vertical-align: 10%;
 
 }
 
 /* ソート */
 .sort {
     display: flex;
-    background: rgba(15, 23, 42, 0.5);
+    background: rgb(41, 50, 70, 0.5);
     padding: 5px;
     border-radius: 10px;
     margin-bottom: 20px;
@@ -59,7 +74,7 @@ h1 {
 
 .sort button.active {
     background: white;
-    color: black;
+    color: rgb(41, 50, 70);
 }
 
 .sort button.purple.active {
@@ -76,7 +91,7 @@ h1 {
 .input-box {
     display: flex;
     gap: 10px;
-    background: #474f5a;
+    background: rgb(41, 50, 70);
     border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 10px;
     border-radius: 15px;
@@ -129,7 +144,7 @@ h1 {
 .checkbox {
     width: 24px;
     height: 24px;
-    border: 2px solid #334155;
+    border: 2px solid rgb(41, 50, 70);
     border-radius: 6px;
     cursor: pointer;
     display: flex;
@@ -138,8 +153,8 @@ h1 {
 }
 
 .card.done .checkbox {
-    background: #10b981;
-    color: black;
+    background: #29e7a8;
+    color: rgb(41, 50, 70);
 }
 
 /* テキスト */
@@ -236,7 +251,7 @@ h1 {
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #1e293b;
+    background: #5b5b5b5b;
     border-radius: 10px;
 }
 
@@ -251,23 +266,6 @@ h1 {
 span {
     letter-spacing: 0.01em;
     color: rgb(68, 170, 221);
-}
-
-.can {
-    color: #000;
-    font-size: 2.0rem;
-    line-height: 2.5rem;
-}
-
-.total {
-    color: rgb(148 163 184);
-    font-size: 1.5rem;
-}
-
-.srash {
-    color: rgb(148 163 184);
-    vertical-align: 10%;
-
 }
 
 .last {
