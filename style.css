@@ -3,12 +3,13 @@ body {
     background: #f0f5ff;
     color: rgb(41, 50, 70);
     font-family: sans-serif;
+    -webkit-tap-highlight-color: transparent;
 }
 
 /* 全体 */
 .app {
-    min-height: 100vh;
     padding: 20px;
+    min-height: 100dvh;
 }
 
 .container {
@@ -21,19 +22,32 @@ body {
 
 /* ヘッダー */
 .header {
+    height: 18%;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    margin-bottom: 20px;
+    flex-wrap: wrap;
 }
 
 h1 {
-    font-size: 28px;
-    font-weight: 900;
+    letter-spacing: -0.125em;
+    font-weight: 800;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    margin-top: 5%;
+    margin-bottom: auto;
+}
+
+h1 span {
+    color: rgb(68, 170, 221);
 }
 
 .count {
     font-size: 20px;
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin: 5px 5px 5px auto;
 }
 
 .can {
@@ -256,17 +270,6 @@ h1 {
 }
 
 
-h1 {
-    letter-spacing: -0.05em;
-    font-weight: 800;
-    font-size: 2.25rem;
-    line-height: 2.5rem;
-}
-
-span {
-    letter-spacing: 0.01em;
-    color: rgb(68, 170, 221);
-}
 
 .last {
     position: sticky;
