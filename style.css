@@ -1,7 +1,7 @@
 body {
     margin: 0;
     background: #f0f5ff;
-    color: rgb(41, 50, 70);
+    color: #293246;
     font-family: sans-serif;
     -webkit-tap-highlight-color: transparent;
 }
@@ -16,7 +16,7 @@ body {
 
 .container {
     max-width: 600px;
-    margin: auto;
+    margin: 15px auto 0 auto;
     height: 90vh;
     display: flex;
     flex-direction: column;
@@ -41,7 +41,7 @@ h1 {
 }
 
 h1 span {
-    color: rgb(68, 170, 221);
+    color: #317ba1;
 }
 
 .count {
@@ -53,18 +53,18 @@ h1 span {
 }
 
 .can {
-    color: rgb(41, 50, 70);
+    color: #293246;
     font-size: 2.0rem;
     line-height: 2.5rem;
 }
 
 .total {
-    color: rgb(148 163 184);
+    color: #94a3b8;
     font-size: 1.5rem;
 }
 
 .srash {
-    color: rgb(148 163 184);
+    color: #94a3b8;
     vertical-align: 10%;
 
 }
@@ -72,7 +72,7 @@ h1 span {
 /* ソート */
 .sort {
     display: flex;
-    background: rgb(41, 50, 70, 0.5);
+    background: #29324680;
     padding: 5px;
     border-radius: 10px;
     margin-bottom: 20px;
@@ -90,7 +90,7 @@ h1 span {
 
 .sort button.active {
     background: white;
-    color: rgb(41, 50, 70);
+    color: #293246;
 }
 
 .sort button.purple.active {
@@ -107,8 +107,8 @@ h1 span {
 .input-box {
     display: flex;
     gap: 10px;
-    background: rgb(41, 50, 70);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #293246;
+    border: 1px solid #ffffff1a;
     padding: 10px;
     border-radius: 15px;
     margin-bottom: 20px;
@@ -132,22 +132,22 @@ h1 span {
 
 /* リスト */
 .list {
-    overflow-y: auto;
+    overflow-y: scroll;
     flex: 1;
 }
 
 /* カード */
 .card {
-    background: rgb(235 255 231);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: #ebffe7;
+    border: 1px solid #ffffff0d;
     padding: 6px 10px;
     border-radius: 15px;
     margin-bottom: 6px;
 }
 
 .card.done {
-    background: rgba(16, 185, 129, 0.1);
-    border-color: rgba(16, 185, 129, 0.3);
+    background: #10b9811a;
+    border-color: #10b9814d;
 }
 
 /* 行 */
@@ -160,7 +160,7 @@ h1 span {
 .checkbox {
     width: 24px;
     height: 24px;
-    border: 2px solid rgb(41, 50, 70);
+    border: 2px solid #5b5b5b;
     border-radius: 6px;
     cursor: pointer;
     display: flex;
@@ -170,7 +170,7 @@ h1 span {
 
 .card.done .checkbox {
     background: #29e7a8;
-    color: rgb(41, 50, 70);
+    color: #5b5b5b;
 }
 
 /* テキスト */
@@ -218,22 +218,22 @@ h1 span {
 
 /* タグ色 */
 .tag-blue {
-    background: rgba(59, 130, 246, 0.2);
+    background: #3b82f633;
     color: #60a5fa;
 }
 
 .tag-purple {
-    background: rgba(168, 85, 247, 0.2);
+    background: #a855f733;
     color: #c084fc;
 }
 
 .tag-rose {
-    background: rgba(244, 63, 94, 0.2);
+    background: #f43f5e33;
     color: #fb7185;
 }
 
 .tag-amber {
-    background: rgba(255, 191, 29, 0.2);
+    background: #ffbf1d33;
     color: #e0a205;
 }
 
@@ -241,7 +241,7 @@ h1 span {
 .tag-input {
     background: #d4e0f6;
     border: none;
-    color: rgb(76, 76, 76);
+    color: #4c4c4c;
     font-size: 10px;
     padding: 2px 5px;
     border-radius: 5px;
@@ -271,13 +271,12 @@ h1 span {
     border-radius: 10px;
 }
 
-
-
+/* フッター　　*/
 .last {
     color: #5b5b5b;
     position: sticky;
     text-align: center;
-    padding: 1rem 0;
+    padding: 5px 0 3px;
     letter-spacing: 0.3px;
     font-style: italic;
     text-transform: uppercase;
