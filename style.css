@@ -4,12 +4,13 @@ body {
     color: #293246;
     font-family: sans-serif;
     -webkit-tap-highlight-color: transparent;
+    padding: 20px;
 }
 
 /* 全体 */
 .app {
     height: 100dvh;
-    /* スマホのキーボード等を考慮した動的な高さ */
+    /* スマホのキーボード等を考慮した高さ */
     display: flex;
     flex-direction: column;
 }
